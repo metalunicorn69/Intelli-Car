@@ -106,11 +106,4 @@ class Modele():
         for i in self.participants:
             self.participants[i].evalueAction()
             
-        self.verifieenvironnement()
-        
-    def verifieenvironnement(self):
-        viseur=self.moi.asset.children["otoviseur"]
-        obj=self.moi.asset
-        xx=obj.rayCast(viseur,obj,30.0,"")
-        if xx[1]:
-            bge.render.drawLine(obj.position,xx[1], (255,0,0))
+        self.moi.cerveau.verifieenvironnement()
