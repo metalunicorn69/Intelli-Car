@@ -6,16 +6,17 @@ class Cerveau():
         self.analyseur=Analyseur()
         self.modele = parent # Référence au modele qui vous represente
         self.participant=self.modele.moi # Référence au participant qui vous represente
-        moi = self.participant.nom
+        self.moi = self.participant.nom
         self.auto = self.participant.auto # Référence a l'auto du participant qui vous represente
-        bge.c.actions.append([moi,"accelere",[]]) 
+        bge.c.actions.append([self.moi,"accelere",[]]) 
        
     def verifieenvironnement(self):
         viseur=self.modele.moi.asset.children["otoviseur"]
         obj=self.modele.moi.asset
-        xx=obj.rayCast(viseur,obj,300.0,"")
+        xx=obj.rayCast(viseur,obj,30.0,"")
         if xx[1]:
             bge.render.drawLine(obj.position,xx[1], (255,255,0))
+            bge.c.actions.append([self.moi,"tournegauche",[]]) 
 
 
 class Analyseur():

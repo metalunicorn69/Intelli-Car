@@ -23,9 +23,9 @@ class Auto():
                               "arrete":self.arrete}
         
     def tournegauche(self,a=None):
-        self.tourne=-0.1
-    def tournedroit(self,a=None):
         self.tourne=0.1
+    def tournedroit(self,a=None):
+        self.tourne=-0.1
         
     def arrete(self,a=None):
         if self.vitesse>0:
@@ -105,5 +105,8 @@ class Modele():
             
         for i in self.participants:
             self.participants[i].evalueAction()
-            
+
+        self.verifieenvironnement()
+    
+    def verifieenvironnement(self):
         self.moi.cerveau.verifieenvironnement()
