@@ -6,8 +6,9 @@ class Cerveau():
         self.analyseur=Analyseur()
         self.modele = parent # Référence au modele qui vous represente
         self.participant=self.modele.moi # Référence au participant qui vous represente
+        moi = self.participant.nom
         self.auto = self.participant.auto # Référence a l'auto du participant qui vous represente
-       
+        bge.c.actions.append([moi,"accelere",[]])        
        
 
 class Analyseur():
