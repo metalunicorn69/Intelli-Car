@@ -1,6 +1,6 @@
 import bge
 import helper
-import reflexion
+#import reflexion
 
 class Cerveau():
     def __init__(self,parent): # parent est l'objet modele qui vous represente
@@ -42,9 +42,4 @@ class Cerveau():
 
         # Tests
         #bge.c.actions.append([self.moi,"accelere",[]]) 
-        reflexion.analyseLaser.AnalyseLaser()
-        
-        
-
-
-
+        #reflexion.analyseLaser.AnalyseLaser()
