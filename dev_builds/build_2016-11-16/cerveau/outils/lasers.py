@@ -10,6 +10,11 @@ class Laser():
         self.auto = self.participant.auto # Référence a l'auto du participant qui vous represente
         self.angleVoiture = 0
         self.deg5toRad = 0.0872665
+        self.angleVoitRad = 1.52716   #Angle de voiture (90) en rad
+        self.angleChoisi = None   #Angle que la voiture va prendre
+        self.nbTournage = 0   #Nb de fois que voiture doit tourner
+        self.compteur = 0   #Nb de fois scan est appelé
+        self.nbPingPourTourner = 50
       
     def calculeAngle(self, laser1, laser2):
         return ((laser1 * self.deg5toRad + laser2 * self.deg5toRad) / 2)
@@ -70,10 +75,33 @@ class Laser():
         for i in listeAng:
             print(i)
 
-        if listeAng:
-            angleChoisi = random.sample(listeAng, 1)
-            print("--- ANLE CHOISI ---")
-            print(angleChoisi)
+        if listeAng and self.angleChoisi == None and self.compteur == 0:
+            self.angleChoisi = random.sample(listeAng, 1)
+            print("--- ANGLE CHOISI ---")
+            print(self.angleChoisi[0])
+
+        if self.angleChoisi:
+            if self.angleVoitRad > self.angleChoisi[0]:
+                self.angleVoitRad = self.angleVoitRad - 0.1
+                bge.c.actions.append([self.moi,"tournedroit",[]])
+                print("--- TOURNE DROIT ---")
+                if self.angleVoitRad < self.angleChoisi[0]:
+                    self.angleVoitRad = 1.5708
+                    self.angleChoisi = None
+                    print("--- ANGLE REBOOT ---")
+
+            elif self.angleVoitRad < self.angleChoisi[0]:
+                self.angleVoitRad = self.angleVoitRad + 0.1
+                bge.c.actions.append([self.moi,"tournegauche",[]])
+                print("--- TOURNE GAUCHE ---")
+                if self.angleVoitRad > self.angleChoisi[0]:
+                    self.angleVoitRad = 1.5708
+                    self.angleChoisi = None
+                    print("--- ANGLE REBOOT ---")
+
+        self.compteur = self.compteur + 1
+        if self.compteur == self.nbPingPourTourner :
+            self.compteur = 0
 
 # Tests
         #bge.c.actions.append([self.moi,"accelere",[]]) 
