@@ -44,7 +44,7 @@ class Laser():
         viseur.position.y = y
 
 
-
+        #METS DANS UNE LISTE LES RÉSULTATS DES LASERS
         for i in range(0,36):
             x,y = helper.Helper.getAngledPoint(self.angleVoiture+(i*self.deg5toRad), DistanceLaser, obj.position.x, obj.position.y)
             viseur.position.x = x
@@ -54,21 +54,24 @@ class Laser():
                 #bge.render.drawLine(obj.position,xx[i][1], (255,255,0))
                 #print("ray["+str(i)+"] distance : "+str(xx[i][1][1]))
 
-        if xx[17][1] is not None:
-            #print(obj.position.x)
-            #print(obj.position.y)
-            #print(helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]))
-            if helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]) < 40:
+
+
+        for i in range(0,2):
+            if xx[16+i][1] is not None:
+                #print(obj.position.x)
+                #print(obj.position.y)
+                #print(helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]))
+                if helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[16+i][1][0], xx[16+i][1][1]) < 40:
                 #print("---")
-                if self.auto.vitesse > 0:
-                    bge.c.actions.append([self.moi,"arrete",[]])
-        else:
-            if self.auto.vitesse < 1:
-                bge.c.actions.append([self.moi,"accelere",[]])
+                    if self.auto.vitesse > 0:
+                        bge.c.actions.append([self.moi,"arrete",[]])
+            else:
+                if self.auto.vitesse < 1:
+                    bge.c.actions.append([self.moi,"accelere",[]])
 
         #REGARDE LISTE DE LASERS ET ANALYSE OÙ SONT LES PASSAGES
         noLaserOuverture = None   #Premier laser qui ne détecte rien (Ouverture)
-        noLaserFermeture = None   #Dernier laser qui ne détecte rien (Fermeture)
+        noLaserFermeture = None   #Dernier .laser qui ne détecte rien (Fermeture)
         for idx, laser in enumerate(xx):   #Enumeration des lasers (idx = Index)
             if idx == 0 and laser[1] is None:   #Si le premier laser est null, début d'ouverture
                 noLaserOuverture = idx
