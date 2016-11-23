@@ -1,0 +1,55 @@
+SCRUM du 25/11/2016
+-------------------
+
+Nicolas et Clovis (analyse laser)
+---------------------------------
+
+Fait: Créer les lasers en avant de la voiture
+	  Détecter les ouvertures
+	  Choisir une ouverture au hasard
+	  Tourner selon l'angle choisi à chaque X ping
+
+À faire: Faire que le code soit propre (séparer les sections)
+		 Implémenter le système de décision (tables de vérités)
+		 Gérer les situations de cul-de-sac
+
+Problèmes: La voiture entrait dans les murs (réglé)
+
+
+Evan et Sébastien (analyse image)
+---------------------------------
+
+Fait:	Implémenter le système de décision (tables de vérités)
+		Scan vertical pour détecter les changements de couleur
+		Scan horizontal pour détecter les changements de couleurs
+		Fonction pour comparer la similarité des couleurs
+
+À faire: Transférer image de screenshot BGE à PIL pour analyse
+		 Définir les contours des édifices
+		 Analyser les trottoirs pour rester sur la route
+		 Analyser pancarte (formes et couleurs)
+		 Détecter et gérer les interserctions
+
+
+Problèmes: Temps d'exécution
+
+
+Maxime et Edwin (map interne)
+-----------------------------
+
+Fait: Répartition map sur 4 cadrans (cadranX = [][])
+	  Dictionnaire retournant cadranActuel ( cadranActuel est un tuple, dictionnaire = {1:cadran1, etc.})
+	  Laser retourne grandeur du trajet depuis le dernier changement de direction
+
+À faire:
+	  Enregistrer dans les bon tableaux de cadran, dépendemment de la direction prise
+	  Calculer angle trajectoire selon increment de direction
+
+Problèmes:
+	  Trouver ratio unité blender VS unité map
+
+
+Tout le monde qui se propose (memoire,apprentissage)
+----------------------------------------------------
+
+Timer des laser doit devenir horloge interne du cerveau
