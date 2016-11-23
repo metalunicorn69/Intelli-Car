@@ -17,6 +17,7 @@ class Cerveau():
         self.laser.scan()
         self.mapping.maptest()
         self.vision.traitementImage()
+        self.vision.prendrePhotoStereo()
 
         # REFLEXION
         self.ref.analyseLasers()
