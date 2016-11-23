@@ -15,6 +15,9 @@ class Laser():
         self.nbTournage = 0   #Nb de fois que voiture doit tourner
         self.compteur = 0   #Nb de fois scan est appelé
         self.nbPingPourTourner = 50
+        self.noReturn = 0   #Compteur qui augmente si la voiture voyage dans le vide trop longtemps
+        self.noReturnTourne = 20   #Nb de fois à tourner pour sortir du no return
+        self.aTourne = 0
       
     def calculeAngle(self, laser1, laser2):
         return ((laser1 * self.deg5toRad + laser2 * self.deg5toRad) / 2)
@@ -47,9 +50,21 @@ class Laser():
             viseur.position.x = x
             viseur.position.y = y
             xx.append(obj.rayCast(viseur,obj,DistanceLaser,""))
-            if xx[i][1]:
-                bge.render.drawLine(obj.position,xx[i][1], (255,255,0))
+            #if xx[i][1]:
+                #bge.render.drawLine(obj.position,xx[i][1], (255,255,0))
                 #print("ray["+str(i)+"] distance : "+str(xx[i][1][1]))
+
+        if xx[17][1] is not None:
+            #print(obj.position.x)
+            #print(obj.position.y)
+            #print(helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]))
+            if helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]) < 40:
+                #print("---")
+                if self.auto.vitesse > 0:
+                    bge.c.actions.append([self.moi,"arrete",[]])
+        else:
+            if self.auto.vitesse < 1:
+                bge.c.actions.append([self.moi,"accelere",[]])
 
         #REGARDE LISTE DE LASERS ET ANALYSE OÙ SONT LES PASSAGES
         noLaserOuverture = None   #Premier laser qui ne détecte rien (Ouverture)
@@ -64,46 +79,57 @@ class Laser():
                 #FONCTION POUR CALCULER ANGLE
                 #if noLaserFermeture - noLaserOuverture > 2:
                 #    print(calculeAngle(noLaserOuverture,noLaserFermeture))
-                print(noLaserOuverture)
-                print(noLaserFermeture)
+                #print(noLaserOuverture)
+                #print(noLaserFermeture)
                 listeAng.append(self.calculeAngle(noLaserOuverture, noLaserFermeture))
-                print("--- SUPPRIME PASSAGE ---")
+                #print("--- SUPPRIME PASSAGE ---")
                 noLaserOuverture = None
                 noLaserFermeture = None
 
-        print("--- LES ANGLES ---")
-        for i in listeAng:
-            print(i)
+        #print("--- LES ANGLES ---")
+        #for i in listeAng:
+            #print(i)
 
         if listeAng and self.angleChoisi == None and self.compteur == 0:
             self.angleChoisi = random.sample(listeAng, 1)
-            print("--- ANGLE CHOISI ---")
-            print(self.angleChoisi[0])
+            #print("--- ANGLE CHOISI ---")
+            #print(self.angleChoisi[0])
 
         if self.angleChoisi:
+            if self.angleChoisi[0] == 1.52716375 :
+                #print("NO RETUUUURNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+                self.noReturn += 1
             if self.angleVoitRad > self.angleChoisi[0]:
                 self.angleVoitRad = self.angleVoitRad - 0.1
                 bge.c.actions.append([self.moi,"tournedroit",[]])
-                print("--- TOURNE DROIT ---")
+                #print("--- TOURNE DROIT ---")
                 if self.angleVoitRad < self.angleChoisi[0]:
                     self.angleVoitRad = 1.5708
                     self.angleChoisi = None
-                    print("--- ANGLE REBOOT ---")
+                    #print("--- ANGLE REBOOT ---")
 
             elif self.angleVoitRad < self.angleChoisi[0]:
                 self.angleVoitRad = self.angleVoitRad + 0.1
                 bge.c.actions.append([self.moi,"tournegauche",[]])
-                print("--- TOURNE GAUCHE ---")
+                #print("--- TOURNE GAUCHE ---")
                 if self.angleVoitRad > self.angleChoisi[0]:
                     self.angleVoitRad = 1.5708
                     self.angleChoisi = None
-                    print("--- ANGLE REBOOT ---")
+                    #print("--- ANGLE REBOOT ---")
 
         self.compteur = self.compteur + 1
         if self.compteur == self.nbPingPourTourner :
             self.compteur = 0
 
+        if self.noReturn == 2:
+            bge.c.actions.append([self.moi,"tournedroit",[]])
+            self.aTourne += 1
+
+        if self.aTourne == self.noReturnTourne:
+            self.aTourne = 0
+            self.noReturn = 0
+
 # Tests
         #bge.c.actions.append([self.moi,"accelere",[]]) 
         #reflexion.analyseLaser.AnalyseLaser()
-        print("--- RECOMMENCE ---")
+        #print("--- RECOMMENCE ---")
