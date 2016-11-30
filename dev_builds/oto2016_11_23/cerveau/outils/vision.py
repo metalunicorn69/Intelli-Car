@@ -9,7 +9,8 @@ class Vision():
         self.modele = parent # Référence au modele qui vous represente
     
     def traitementImage(self):
-        print("analyseImage!")
+        pass
+        #print("analyseImage!")
 
     #prend UN screenshot
     def prendreScreenshot(self, nom):

@@ -6,4 +6,5 @@ class Mapping():
         self.modele = parent # Référence au modele qui vous represente
     
     def maptest(self):
-        print("MAPPING!")
+    	pass
+        #print("MAPPING!")

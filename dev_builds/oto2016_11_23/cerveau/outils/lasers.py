@@ -66,6 +66,7 @@ class Laser():
                 #print("---")
                     if self.auto.vitesse > 0:
                         bge.c.actions.append([self.moi,"arrete",[]])
+                        print("arrete")
             else:
                 if self.auto.vitesse < 1:
                     bge.c.actions.append([self.moi,"accelere",[]])
