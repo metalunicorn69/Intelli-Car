@@ -28,7 +28,7 @@ class Auto():
         self.tourne=-0.1
         
     def arrete(self,a=None):
-        if self.vitesse>0:
+        if self.vitesse>-0.3:
             self.vitesse=self.vitesse-self.acceleration
         
     def accelere(self,a=None):

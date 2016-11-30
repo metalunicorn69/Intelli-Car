@@ -14,7 +14,7 @@ class Cerveau():
         
     def verifieenvironnement(self):
         # OBSERVATIONS
-        #self.laser.scan()
+        self.laser.scan()
         self.mapping.maptest()
         self.vision.traitementImage()
         

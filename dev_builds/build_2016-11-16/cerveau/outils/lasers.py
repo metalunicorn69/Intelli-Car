@@ -61,9 +61,9 @@ class Laser():
                 #print(obj.position.x)
                 #print(obj.position.y)
                 #print(helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[17][1][0], xx[17][1][1]))
-                if helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[16+i][1][0], xx[16+i][1][1]) < 40:
+                if helper.Helper.calcDistance(obj.position.x, obj.position.y, xx[16+i][1][0], xx[16+i][1][1]) < 30:
                 #print("---")
-                    if self.auto.vitesse > 0:
+                    if self.auto.vitesse > -0.3:
                         bge.c.actions.append([self.moi,"arrete",[]])
             else:
                 if self.auto.vitesse < 1:
