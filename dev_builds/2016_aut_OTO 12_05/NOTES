@@ -1,0 +1,67 @@
+Nouveautes avec la version 2016_11_30;11:50
+* changer vitesse min de l'auto a -0.2 (ajout de variable self.min)
+
+    Ajout de pancartes
+    ajout de parc
+     (should work)
+
+#********************************************
+Nouveautes avec la version 2016_11_16;9:00
+* changer vitesse minsde l'auto a -0.2 (ajout de variable self.min)
+
+
+
+#*********************************************
+
+
+Nouveautes avec la version 2016_11_02;12:00
+* Ajout de la possibilite d'inscrire multiples options au demarrage
+  VOIR l'attribut self.optionsdyn du controleur
+
+* Ajout d'un bouton pour supprimer le contenu de la console
+  sur la page de connection
+
+#*********************************************
+
+Nouveautes avec la version 2016_10_19;10:25
+
+* Ajout d'un cerveau uniquement pour votre participant, le locals
+
+#********************************************
+
+Nouveautes avec la version 2016_10_19;9:00
+
+* Ajout d'un module OTO_cerveau à être remplacé par le vôtre
+
+* 1- OTO_cerveau sert a fournir le module personnalisé de votre développement d'IA pour controler 
+     la voitures
+
+* Ajout d'une camera "vol-d-oiseau"
+  1- touche "1" -> camera vol-d-oiseau (barre de nombre au-dessus des alpha)
+  2- touche "2" -> camera auto
+
+* Ajout d'un dossier 'images/' pour y mettre les photos
+  (les photos sont nommes nnnn_nnnnnn (secondes_fraction) tire de time.time()
+  
+* Ajout d'un HUD (Head Up Display) ou on affiche la derniere photo
+  1- touche "h" pour montrer ou cacher le HUD
+
+* Ajout d'un 'Clear Screen' 
+  1- touche "l"
+
+
+
+NOTES sur le BGUI
+
+visible pour voir ou nons
+
+frozen pour geler le bouton
+
+position au lieu de pos
+
+#HACK
+import os
+os.chdir(bge.logic.expandPath('//'))  #blender change ses references de 
+
+activate et deactivate donne le focus a ce widget donc le dernier appelle,
+ - il faut que activate soit le dernier ...
