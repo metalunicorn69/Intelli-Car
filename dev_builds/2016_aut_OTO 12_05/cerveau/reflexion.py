@@ -1,12 +1,28 @@
+import outils.vision
+
 class Reflexion():
     def __init__(self):
         pass
     
     def analyseVision(self):
-        #Example: La vision en deduit que chaque action est possible
-        result = [1,1,1,1]
-        return result
-    
+        result = [0,0,0,0]
+        vision = vision.Vision() #instancier
+        image = vision.getScreen() #prendre le screenshot et le charger en objet PIL
+        imageBoW = vision.convertirBoW(image) #convertion en noir et blanc
+
+        if vision.routeEnFace(image) is True:
+            result[0] = 1
+        else:
+            result[1] = 1
+
+        if vision.rueADroite is True:
+            result[2] = 1
+
+        if vision.rueAGauche is True:
+            result[3] = 1
+
+        print(result)
+        return result 
     def analyseMapping(self):
         #Example: Le mapping en deduit que chaque action est possible sauf stop
         result = [1,0,1,1]
@@ -34,4 +50,3 @@ class Reflexion():
                 numeroChoix.append(0)
       
         return numeroChoix
-        

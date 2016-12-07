@@ -68,6 +68,16 @@ class Vision():
 
         return avantNoir and entreNoir and apresNoir
 
+    # Est-ce que la route continue
+    def routeEnFace(image):
+        width, height = image.size
+        centre = int(width/2)
+        arrayCentre = changementCouleurVertical(image, centre)
+        if arrayCentre[len(arrayCentre)-1] < (height/5*3):
+            return True
+        else:
+            return False
+
     def convertirBoW(image):
         imageBoW = Image.new('L', image.size) #cree une nouvelle image grayscale
         imageBoW.paste(image) #colle le contenu de l'image rgb
